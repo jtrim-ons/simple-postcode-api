@@ -15,9 +15,8 @@ with open("postcode_lookup.csv", "r") as f:
             headings = row
             continue
         postcode = row[0]
-        postcode_prefix_end = re.search("^[A-Z]+", postcode).end()
-        postcode_prefix = postcode[:postcode_prefix_end]
-        postcode_suffix = postcode[postcode_prefix_end:].replace(' ', '_')
+        postcode_prefix = postcode[:2]
+        postcode_suffix = postcode[2:].replace(' ', '_')
         postcode_filename = postcode_suffix[:-2]
         postcode_prefix_counter[postcode_prefix] += 1
         Path("intermediate/{}".format(postcode_prefix)).mkdir(parents=True, exist_ok=True)
